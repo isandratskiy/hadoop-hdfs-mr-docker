@@ -38,7 +38,7 @@ public class SparkDataSet {
                 .option("header", "true")
                 .option("delimiter", ",")
                 .schema(schema)
-                .load("data/annual-enterprise-survey-2020-financial-year-provisional-csv.csv");
+                .load("src/test/resources/annual-enterprise-survey-2020-financial-year-provisional-csv.csv");
     }
 
     @AfterEach
@@ -50,7 +50,7 @@ public class SparkDataSet {
     @Test
     void shouldCount() {
         this.ds = ds.select("Variable_name").filter("Variable_name = 'Indirect taxes'");
-        this.ds.show(50);
+        this.ds.show(100);
         assertEquals(1112, this.ds.count());
     }
 }
