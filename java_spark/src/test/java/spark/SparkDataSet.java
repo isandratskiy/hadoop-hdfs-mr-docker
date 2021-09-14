@@ -10,7 +10,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.apache.spark.sql.SparkSession.builder;
-import static org.apache.spark.sql.types.DataTypes.*;
+import static org.apache.spark.sql.types.DataTypes.IntegerType;
+import static org.apache.spark.sql.types.DataTypes.StringType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Spark DataSet")
@@ -25,13 +26,13 @@ public class SparkDataSet {
         var schema = new StructType()
                 .add("Year", IntegerType, true)
                 .add("Industry_aggregation_NZSIOC", StringType, true)
-                .add("Industry_code_NZSIOC", IntegerType, true)
+                .add("Industry_code_NZSIOC", StringType, true)
                 .add("Industry_name_NZSIOC", StringType, true)
                 .add("Units", StringType, true)
                 .add("Variable_code", StringType, true)
                 .add("Variable_name", StringType, true)
                 .add("Variable_category", StringType, true)
-                .add("Value", DateType, true)
+                .add("Value", StringType, true)
                 .add("Industry_code_ANZSIC06", StringType, true);
 
         this.ds = spark.read().format("csv")
@@ -49,8 +50,8 @@ public class SparkDataSet {
     @DisplayName("should count all values")
     @Test
     void shouldCount() {
-        this.ds = ds.select("Variable_name").filter("Variable_name = 'Indirect taxes'");
-        this.ds.show(100);
+        this.ds = ds.filter("Variable_name = 'Indirect taxes'");
+        this.ds.show(30);
         assertEquals(1112, this.ds.count());
     }
 }
