@@ -16,13 +16,22 @@ public class SparkDataSet {
 
     @Test
     @DisplayName("should sum all 'taxes' values")
-    void shouldCount(Dataset<String> ds) {
-        var filteredDs = ds.filter(col("Variable_name").contains("taxes"))
+    void shouldSumValues(Dataset<String> ds) {
+        var groupedDs = ds.filter(col("Variable_name").contains("taxes"))
                 .withColumn("Value", regexp_replace(col("Value"), ",", "."))
-                .withColumn("Value", col("Value").cast(DoubleType));
-        var groupedDs = filteredDs.groupBy("Variable_name").sum("Value");
+                .withColumn("Value", col("Value").cast(DoubleType))
+                .groupBy("Variable_name").sum("Value");
         var sum = groupedDs.first().getDouble(1);
         groupedDs.show();
         assertEquals(73819.69, sum);
+    }
+
+    @Test
+    @DisplayName("should sum all 'taxes' values")
+    void shouldFilterValues(Dataset<String> ds) {
+        var filteredDs = ds.filter(col("Variable_name").contains("taxes"))
+                .filter(col("Value").gt(800));
+        filteredDs.show();
+        assertEquals(1, filteredDs.count());
     }
 }
