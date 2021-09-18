@@ -2,7 +2,7 @@ plugins {
     java
 }
 
-subprojects {
+allprojects {
     apply(plugin = "java")
 
     repositories {
@@ -13,7 +13,6 @@ subprojects {
     version = "0.1.1"
 
     dependencies {
-
         implementation("org.apache.spark:spark-sql_2.12:3.1.2")
         implementation("org.apache.spark:spark-core_2.12:3.1.2")
 

@@ -10,7 +10,7 @@ import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static org.apache.spark.sql.types.DataTypes.StringType;
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
-public class SetupDataSet implements BeforeAllCallback, ParameterResolver, AfterEachCallback {
+public class SetupDataSetExtension implements BeforeAllCallback, ParameterResolver, AfterEachCallback {
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {

@@ -11,7 +11,7 @@ import static org.apache.spark.sql.types.DataTypes.DoubleType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Spark DataSet")
-@ExtendWith(SetupDataSet.class)
+@ExtendWith(SetupDataSetExtension.class)
 public class SparkDataSet {
 
     @Test
