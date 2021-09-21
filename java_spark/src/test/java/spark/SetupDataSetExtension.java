@@ -10,7 +10,7 @@ import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static org.apache.spark.sql.types.DataTypes.StringType;
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
-public class SetupDataSetExtension implements BeforeAllCallback, ParameterResolver, AfterEachCallback {
+public class SetupDataSetExtension implements BeforeEachCallback, ParameterResolver, AfterEachCallback {
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
@@ -23,7 +23,7 @@ public class SetupDataSetExtension implements BeforeAllCallback, ParameterResolv
     }
 
     @Override
-    public void beforeAll(ExtensionContext context) {
+    public void beforeEach(ExtensionContext context) {
         var spark = builder().master("local[*]").appName("Spark_DataSet").getOrCreate();
 
         var schema = new StructType()

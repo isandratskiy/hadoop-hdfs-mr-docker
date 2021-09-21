@@ -27,7 +27,7 @@ public class SparkDataSet {
     }
 
     @Test
-    @DisplayName("should sum all 'taxes' values")
+    @DisplayName("should filter values")
     void shouldFilterValues(Dataset<String> ds) {
         var filteredDs = ds.filter(col("Variable_name").contains("taxes"))
                 .filter(col("Value").gt(800));
